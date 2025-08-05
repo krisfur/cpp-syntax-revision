@@ -1,6 +1,8 @@
-# C++ Syntax Revision
+# 🐀 C++ Syntax Revision
 
-Little syntax revision notes for C++17 and onwards syntax.
+![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=cplusplus&logoColor=white) [![C++](https://img.shields.io/badge/C++-17-blueviolet)](https://isocpp.org/)
+
+Little syntax revision notes for C++17 and onwards syntax (auto, memory safe pointers, all that jazz).
 
 # Setting up a project
 
