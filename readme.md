@@ -4,6 +4,11 @@
 
 Little syntax revision notes for C++17 and onwards syntax (auto, memory safe pointers, all that jazz).
 
+# Prerequisites
+
+- C++ compiler of sorts, on windows visual studio build tools provide a nice one, on mac `g++`, on linux `gcc`, or any other one you like
+- `CMake`, which does all the heavy lifting and linking for us
+
 # Setting up a project
 
 Base setup requires a `main.cpp` as the core of the program, and a `CMakeLists.txt` that points to it, as well as allows for linking any other libraries.
