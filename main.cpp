@@ -5,10 +5,19 @@
 #include <array> // for std::array, a safer alternative to C-style arrays
 #include <vector> // for using vectors
 #include <algorithm> // for algorithms like std::sort
+#include <map> // for using maps (key-value pairs)
 #include <random> // for random number generation
 #include <fstream> // for file I/O
+#include <optional> // for std::optional, which can represent a value that may or may not be present
 
 #include "functions.hpp" // include the header file for function declarations
+
+std::optional<std::string> find_user(int id) {
+        if (id == 1) {
+            return "Alice"; // Return a value
+        }
+        return std::nullopt; // Return an empty optional
+    }
 
 class myClass{
     public:
@@ -279,7 +288,37 @@ int main() {
     if (it != nums.end()) {
         std::cout << "Found 8!\n";
     }
-	
+
+
+    // #####
+    // Maps
+
+    //#include <map> // for using maps (key-value pairs), like dict in Python
+
+    std::map<std::string, int> ages;
+    ages["Alice"] = 30;
+    ages["Bob"] = 25;
+
+    std::cout << "Alice's age is " << ages["Alice"] << std::endl;
+
+    //struture bindings
+    for (const auto& [name, age] : ages) {
+        std::cout << name << " is " << age << " years old.\n";
+    }
+
+
+    // #################
+    // Lambda functions
+
+    // Use a lambda with std::count_if to count the even numbers.
+    std::vector<int> dataVec = {1, 2, 3, 4, 5, 6};
+    int64_t even_count = std::count_if(dataVec.begin(), dataVec.end(), [](int n) {
+        // This is the lambda function: [](...){...}
+        return n % 2 == 0;
+    });
+
+    std::cout << "There are " << even_count << " even numbers.\n";
+        
 	
     // #############
 	// Conditionals
@@ -514,7 +553,41 @@ int main() {
     std::cout << "Function example: " << addition(5, 3) << std::endl; // calls the addition function from functions.cpp
 
     // !! You also need to include the functions.cpp file in your CMakeLists.txt file to compile it
+
+    // Optional values
+    // C++17 introduced std::optional, which can be used to represent a value that
+    //#include <optional> // for std::optional, which can represent a value that may or may not be present
+
+    // This function might not find a user.
+    /*
+    std::optional<std::string> find_user(int id) {
+        if (id == 1) {
+            return "Alice"; // Return a value
+        }
+        return std::nullopt; // Return an empty optional
+    }
+    */
+    auto user = find_user(1);
+    if (user.has_value()) { // or just 'if (user)'
+        std::cout << "Found user: " << user.value() << std::endl;
+    }
 	
+
+    // ##########
+    // Templates
+
+    // A single function template that works for any type supporting the '+' operator.
+    /*
+    template <typename T>
+    T addT(T a, T b) {
+        return a + b;
+    }
+    */
+
+    // !! this all goes in the header file, not in the cpp file !!
+
+    int sum_int = addT(5, 3);       // T becomes int
+    double sum_double = addT(2.5, 3.7); // T becomes double
 	
 	// ##############
 	// Stream states
