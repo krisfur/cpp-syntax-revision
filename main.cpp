@@ -4,6 +4,7 @@
 #include <cmath> // for mathematical functions
 #include <array> // for std::array, a safer alternative to C-style arrays
 #include <vector> // for using vectors
+#include <algorithm> // for algorithms like std::sort
 #include <random> // for random number generation
 #include <fstream> // for file I/O
 
@@ -249,14 +250,34 @@ int main() {
 
     // ##############################
 	// Iterating over a std::vector
-	//for loop - oldschool C-style loop
+	//for loop - oldschool C-style loop - AVOID!
+    /*
 	for(int i=0;i<myVector.size();++i){
 		//stuff accessing myVector[i]
 	}
-	
+	*/
+
 	//C++11 auto loop
 	for(auto& item : myVector){ //get a reference to each item in the vector, consider const auto& if you don't want to modify the items
         std::cout << item << " "; //prints each item in the vector
+    }
+    std::cout << std::endl; //just flushes the output buffer
+
+
+    // ###########
+    // Algorithms
+
+    //#include <algorithm> // for algorithms like std::sort, std::find, etc.
+
+    std::vector<int> nums = {5, 2, 8, 1, 9};
+
+    // Sort the vector
+    std::sort(nums.begin(), nums.end());
+
+    // Find a specific value
+    auto it = std::find(nums.begin(), nums.end(), 8);
+    if (it != nums.end()) {
+        std::cout << "Found 8!\n";
     }
 	
 	
@@ -293,9 +314,9 @@ int main() {
 	// Loops
 	
 	//while loop - same as C#
-	int condition=1;
-	while(condition<=10){ //can use a bool set to 1 or not increment in order to get an infinite loop
-		std::cout << i << std::endl;
+	int condition=3;
+	while(condition<=5){ //can use a bool set to 1 or not increment in order to get an infinite loop
+		std::cout << condition << std::endl;
 		condition++;
 	}
 	
@@ -309,12 +330,8 @@ int main() {
     */
 	
 	//for loop - for(initialization; condition to keep going; increase);
-	for(int i=1; i<10; i++){
+	for(int i=1; i<3; i++){
 		std::cout << i << std::endl;
-	}
-	//outputting into an array
-	for (int i = 0; i < 10; ++i){
-		std::cout << i << std::endl; //prints newly updated array every pass
 	}
 	
 	//for loop for running through a set of data - like for each loop in C# or for loop in Python
