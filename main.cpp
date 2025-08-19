@@ -2,6 +2,7 @@
 #include <string> // for std::string and std::string_view
 #include <string_view> // memory safe way to avoid copying data of a string
 #include <cmath> // for mathematical functions
+#include <array> // for std::array, a safer alternative to C-style arrays
 #include <vector> // for using vectors
 #include <random> // for random number generation
 #include <fstream> // for file I/O
@@ -165,36 +166,70 @@ int main() {
 	
     // #######
 	// arrays
+
+    //#include <array> // for std::array, a safer alternative to C-style arrays
+
+    // The structure is: std::array<type, size> name = { ... };
+    // The size is part of the type and must be known at compile time.
+    std::array<double, 4> numbers = {1, 2.4, 3.6, 7.8};
+
+    // You change elements in the same way:
+    numbers[3] = 4.5; // We are still counting from 0.
+
+    // Accessing elements is also the same, but the .at() method is safer
+    std::cout << numbers[3] << std::endl; // Prints 4.5
+
+    // A key benefit: an std::array knows its own size! C-style doesn't
+    std::cout << "The size of the array is: " << numbers.size() << std::endl;
+
+    // For safe access, use .at(), which checks if the index is in bounds.
+    // This will throw an error if you go out of range, preventing bugs.
+    try {
+        std::cout << numbers.at(3) << std::endl; // OK
+        std::cout << numbers.at(10) << std::endl; // This would throw an exception
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    // A 2D array is simply an array of arrays.
+    // The structure is: std::array<std::array<type, columns>, rows> name = { ... };
+
+    std::array<std::array<double, 3>, 2> results2d = {{
+        {1, 2, 3},  // This list initializes the first inner array
+        {4, 5, 6}   // This list initializes the second inner array
+    }};
+
+    // Accessing items is identical to the C-style version:
+    std::cout << results2d[1][2] << std::endl; // Prints 6 (3rd element from 2nd row)
+    //or safely
+    try {
+        std::cout << results2d.at(1).at(2) << std::endl; // Also prints 6
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
 	
-	//new array
+	// C-style arrays are no longer recommended, but you can still use them
 	//structure is: datatype arrayName[number of things in an array] = {items, in, the, array}
-	
-	double numbers[]={1,2.4,3.6,7.8};
+	//double numbers[]={1,2.4,3.6,7.8};
 	//not giving the array size makes an array just the size needed, you can declare an array without doing anything by using:
 	//double numbers[]={stuff, stuff, stuff};
-	
-	//you can change a single thing in an array like this:
-	numbers[3]=4.5; //ofc we are counting from 0
-	
+
 	//accessing array elements:
-	std::cout << numbers[3] << std::endl;
+	//std::cout << numbers[3] << std::endl;
 	//prints 4.5
-	
+
 	//declaring two-dimensional arrays
 	//type name[number of rows][number of items in a row];
-	
-	//one line initialising:
-	double results[2][3]={ {1,2,3}, {4,5,6} };
-	
+    //double results[2][3]={ {1,2,3}, {4,5,6} };
 	//accessing items in 2d arrays:
-	std::cout << results[1][2] << std::endl; //prints 3rd element from 2nd row
+	//std::cout << results[1][2] << std::endl; //prints 3rd element from 2nd row
 	//output: 6
 	
 	
     // ########
 	// vectors
 
-	//vectors are like arrays, but it's hard to change items inside, only the ones at the end
+	//vectors are like arrays, but it's hard to insert items in the middle, only the ones at the ends
 	//in exchange they protect you from errors of calling an item beyond the indexes in the list
 	//vectors can contain both basic-types as well as user defined types (objects)
 	//need to #include<vector>
