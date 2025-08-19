@@ -318,6 +318,19 @@ int main() {
     });
 
     std::cout << "There are " << even_count << " even numbers.\n";
+
+    // You can use the [] to capture variables from the surrounding scope.
+
+    int threshold = 4;
+
+    // Use a capture to make 'threshold' available inside the lambda.
+    // [threshold] captures the variable 'threshold' by value (a copy).
+    int count = std::count_if(dataVec.begin(), dataVec.end(), [threshold](int n) {
+        return n > threshold;
+    });
+
+    std::cout << "There are " << count 
+              << " numbers greater than " << threshold << ".\n";
         
 	
     // #############
