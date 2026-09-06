@@ -8,6 +8,7 @@
 #include <map> // for using maps (key-value pairs)
 #include <random> // for random number generation
 #include <fstream> // for file I/O
+#include <memory>
 #include <optional> // for std::optional, which can represent a value that may or may not be present
 
 #include "functions.hpp" // include the header file for function declarations
